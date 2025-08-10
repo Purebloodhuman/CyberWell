@@ -39,15 +39,20 @@ document.addEventListener("DOMContentLoaded", () => {
 function toggleDarkMode() {
   const body = document.body;
   const themeIcon = document.getElementById("theme-icon");
+  const nav = document.querySelector("nav");
 
   if (body.classList.contains("dark-mode")) {
     body.classList.remove("dark-mode");
     body.classList.add("light-mode");
+    nav.classList.remove("navbar-dark");
+    nav.classList.add("navbar-light");
     themeIcon.className = "fas fa-moon";
     localStorage.setItem("theme", "light");
   } else {
     body.classList.remove("light-mode");
     body.classList.add("dark-mode");
+    nav.classList.remove("navbar-light");
+    nav.classList.add("navbar-dark");
     themeIcon.className = "fas fa-sun";
     localStorage.setItem("theme", "dark");
   }
@@ -58,13 +63,16 @@ function initializeTheme() {
   const savedTheme = localStorage.getItem("theme");
   const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
   const themeIcon = document.getElementById("theme-icon");
+  const nav = document.querySelector("nav");
 
   if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
     document.body.classList.add("dark-mode");
     themeIcon.className = "fas fa-sun";
+    nav.classList.add("navbar-dark");
   } else {
     document.body.classList.add("light-mode");
     themeIcon.className = "fas fa-moon";
+    nav.classList.add("navbar-light");
   }
 }
 
